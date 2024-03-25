@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<center>
+    <h1>Patient Report</h1>
+</center>
+
+<div class="registrationsdiv">
+    <div class="formspage">
+        <form class="reg-form">
+            <div class="mb-3 row">
+                <label for="name" class="col-sm-6 col-form-name"><strong>Total Number of Patients:</strong></label>
+                <div class="col-sm-6">
+                    {{ total_patients }}
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="age" class="col-sm-6 col-form-age"><strong>Average Age of Patients:</strong></label>
+                <div class="col-sm-6">
+                    {{ average_age }}
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="gender" class="col-sm-6 col-form-gender"><strong>Total Number of
+                        Prescriptions:</strong></label>
+                <div class="col-sm-6">
+                    {{ total_prescriptions }}
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="address" class="col-sm-6 col-form-address"><strong>Total Number of
+                        Appointments:</strong></label>
+                <div class="col-sm-6">
+                    {{ total_appointments }}
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="address" class="col-sm-6 col-form-address"><strong>Total Revenue from
+                        Prescriptions:</strong></label>
+                <div class="col-sm-6">
+                    ${{ total_revenue }}
+                </div>
+            </div>
+            <div class="mb-3 row" style="align-content: center;">
+                <button class="btn btn-primary col-sm-6" onclick="printReport()">Print Report</button>
+            </div>
+
+            <script>
+                function printReport() {
+                    window.print();
+                }
+            </script>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

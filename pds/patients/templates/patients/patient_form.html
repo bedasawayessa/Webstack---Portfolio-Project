@@ -1,0 +1,93 @@
+{% extends 'back/base.html' %}
+
+{% block content %}
+<!-- What we do-->
+<div class="container-fluid">
+  <header>
+    <h1>Admin Dashboard</h1>
+  </header>
+  <hr>
+  <div class="container-fluid">
+    <h1 style="text-align: center;">Profile</h1>
+    {% if request.session.user_type %}
+    <div class="alert alert-success forms" role="alert">
+      <!-- Access session data -->
+      <p> You logged in as a: {{ request.session.user_type }}</p>
+    </div>
+    {% endif %}
+    <div class="cards">
+      <div class="card" tyle="overflow-x:auto;">
+        <!-- Start here data -->
+        <div class="registrationsdiv">
+          <div class="formspage" style="min-width: 50%;">
+            <!-- <center> -->
+            <h1>
+              {% if form.instance.pk %}
+              Update Patient
+              {% else %}
+              Create Patient
+              {% endif %}
+            </h1>
+
+            <form method="post" class="reg-form">
+              {% csrf_token %}
+
+              <div class="fieldWrapper" style="margin: 0;">
+                {{ form.user.errors }}
+                <label for="{{ form.user.id_for_label }}">Users: </label>
+                {{ form.user }}
+              </div>
+
+              <div class="fieldWrapper" style="margin: 0;">
+                {{ form.name.errors }}
+                <label for="{{ form.name.id_for_label }}">Name: </label>
+                {{ form.name }}
+              </div>
+              <div class="fieldWrapper" style="margin: 0;">
+                {{ form.age.errors }}
+                <label for="{{ form.age.id_for_label }}">Age: </label>
+                {{ form.age }}
+              </div>
+
+              <div class="fieldWrapper" style="margin: 0;">
+                {{ form.gender.errors }}
+                <label for="{{ form.gender.id_for_label }}">Gender: </label>
+                {{ form.gender }}
+              </div>
+              <div class="fieldWrapper" style="margin: 0;">
+                {{ form.address.errors }}
+                <label for="{{ form.address.id_for_label }}">Address: </label>
+                {{ form.address }}
+              </div>
+
+              <div class="fieldWrapper" style="margin: 0;">
+                {{ form.phone_number.errors }}
+                <label for="{{ form.phone_number.id_for_label }}">Phone number: </label>
+                {{ form.phone_number }}
+              </div>
+              <div class="fieldWrapper" style="margin: 0;">
+                {{ form.medical_history.errors }}
+                <label for="{{ form.medical_history.id_for_label }}">Medical history: </label>
+                {{ form.medical_history }}
+              </div>
+              <div class="fieldWrapper" style="margin: 0;">
+                {{ form.created_at.errors }}
+                <label for="{{ form.created_at.id_for_label }}">Created at: </label>
+                {{ form.created_at }}
+              </div>
+
+              <div class="fieldWrapper">
+                <button type="submit">{% if form.instance.pk %} Update {% else %} Create {% endif %}</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+        <!-- End here data -->
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

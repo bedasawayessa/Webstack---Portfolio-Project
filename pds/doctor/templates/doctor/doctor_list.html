@@ -1,0 +1,99 @@
+{% extends 'back/base.html' %}
+
+{% block content %}
+<!-- What we do-->
+<div class="container-fluid">
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+    <hr>
+    <div class="container">
+        <h1 style="text-align: center;">Profile</h1>
+        {% if request.session.user_type %}
+        <div class="alert alert-success forms" role="alert">
+            <!-- Access session data -->
+            <p> You logged in as a: {{ request.session.user_type }}</p>
+        </div>
+        {% endif %}
+        <div class="cards">
+            <div class="card" style="overflow-x:auto;">
+                <!-- Start here data -->
+                <center>
+                    <h1>Doctors List</h1>
+                    <div class="row">
+                        <form method="get"
+                            style="display: flex; gap: 0.5rem; align-items: center; justify-content: center;">
+                            <!-- <div class="row" style="display: flex; gap: 0.1rem; align-items: center; justify-content: center;"> -->
+                            <div class="fieldWrapper">
+                                <strong>Search: </strong>
+                            </div>
+                            <div class="fieldWrapper" style="margin: 0;">
+                                {{ search_form.search_query }}
+                            </div>
+                            <div class="fieldWrapper" style="margin: 0;">
+                                {{ search_form.search_by }}
+                            </div>
+                            <div class="fieldWrapper">
+                                <input type="submit" value="Search" />
+                            </div>
+                            <!-- </div> -->
+                            <!-- 
+                            {{ search_form.search_query }}
+                            {{ search_form.search_by }}
+                             -->
+
+                        </form>
+                    </div>
+
+
+                    <div class="registrationsdiv">
+                        <div class="formspage">
+                            <form class="reg-form">
+
+                                <div class="table-wrapper">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr style="gap: 10rem;">
+                                                <th scope="col">#</th>
+                                                <th scope="col">Username</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Speciality</th>
+
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for doctor in doctors %}
+                                            <tr>
+                                                <th scope="row">{{ forloop.counter }}</th>
+                                                <td>{{ doctor.name }}</td>
+                                                <td>{{ doctor.name }}</td>
+                                                <td>{{ doctor.specialty }}</td>
+
+                                                <td>
+                                                    <button type="button" class="btn btn-primary"><a
+                                                            href="{% url 'doctor:doctor_detail' doctor.pk%}"
+                                                            style="color: white; font-weight: bold;">
+                                                            Detail</a></button>
+
+                                                </td>
+                                                {% endfor %}
+                                            </tr>
+                                            <!-- Add more rows as needed -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </center>
+
+                <!-- End here data -->
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

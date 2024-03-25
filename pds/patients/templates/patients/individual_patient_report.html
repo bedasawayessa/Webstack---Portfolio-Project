@@ -1,0 +1,118 @@
+{% extends 'back/base.html' %}
+
+{% block content %}
+<center>
+    <h1>Individual Patient Report</h1>
+</center>
+
+<div class="container">
+    <div class="registrationsdiv">
+        <div class="formspage" style="max-width: 70%;">
+
+            <form class="reg-form" style="justify-content: center;">
+                <h2>Basic Information</h2>
+                <ul>
+                    <li>
+                        <div class="mb-3 row">
+                            <label for="name" class="col-sm-4 col-form-name"><strong>Name:</strong></label>
+                            <div class="col-sm-8">
+                                {{ patient.name }}
+                            </div>
+                            <label for="name" class="col-sm-4 col-form-name"><strong>Patient Contact:</strong></label>
+                            <div class="col-sm-8">
+                                {{ patient.phone_number }}
+                            </div>
+                            
+                            <label for="age" class="col-sm-4 col-form-age"><strong>Age:</strong></label>
+                            <div class="col-sm-8">
+                                {{ patient.age }}
+                            </div>
+                            <label for="gender" class="col-sm-4 col-form-gender"><strong>Gender:</strong></label>
+                            <div class="col-sm-8">
+                                {{ patient.gender }}
+                            </div>
+                            <label for="address" class="col-sm-4 col-form-address"><strong>Address:</strong></label>
+                            <div class="col-sm-8">
+                                {{ patient.address }}
+                            </div>
+                            <label for="address" class="col-sm-4 col-form-address"><strong>Medical History:</strong></label>
+                            <div class="col-sm-8">
+                                {{ patient.medical_history }}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                </p>
+                <h2>Prescriptions</h2>
+                {% for prescription in prescriptions %}
+                <ul>
+                    <li>
+                        <div class="mb-3 row">
+                            <label for="address" class="col-sm-4 col-form-address"><strong>Medication Name:</strong></label>
+                            <div class="col-sm-8">
+                                {{ prescription.medication_name }}
+                            </div>
+                            <label for="address" class="col-sm-4 col-form-address"><strong>Dosage:</strong></label>
+                            <div class="col-sm-8">
+                                {{ prescription.dosage }}
+                            </div>
+                            <label for="address" class="col-sm-4 col-form-address"><strong>Doctor:</strong></label>
+                            <div class="col-sm-8">
+                                {{ prescription.doctor }}
+                            </div>
+                            <label for="address" class="col-sm-4 col-form-address"><strong>Prescription
+                                    Date:</strong></label>
+                            <div class="col-sm-8">
+                                {{ prescription.start_date }}
+                            </div>
+                            <label for="address" class="col-sm-4 col-form-address"><strong>Prescription End Date:</strong></label>
+                            <div class="col-sm-8">
+                                {{ prescription.end_date }}
+                            </div>
+
+                        </div>
+                    </li>
+                </ul>
+                {% endfor %}
+
+
+                <h2>Appointments</h2>
+                {% for appointment in appointments %}
+                <ul>
+                    <li>
+                        <div class="mb-3 row">
+                            <label for="created_at" class="col-sm-4 col-form-created_at"><strong>Appointment Started:</strong></label>
+                            <div class="col-sm-8">
+                                {{ appointment.created_at }}
+                            </div>
+                            <label for="doctor" class="col-sm-4 col-form-doctor"><strong>Doctor:</strong></label>
+                            <div class="col-sm-8">
+                                {{ appointment.doctor }}
+                            </div>
+                            <label for="reason" class="col-sm-4 col-form-reason"><strong>Reason:</strong></label>
+                            <div class="col-sm-8">
+                                {{ appointment.reason }}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                {% endfor %}
+
+                <div class="mb-3 row">
+                    <center>
+                        <button class="btn btn-primary col-sm-6" onclick="printReport()">Print Report</button>
+                    </center>
+                </div>
+
+                <script>
+                    function printReport() {
+                        window.print();
+                    }
+                </script>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
