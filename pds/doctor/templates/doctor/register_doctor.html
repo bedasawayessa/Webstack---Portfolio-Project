@@ -1,0 +1,59 @@
+{% extends 'back/base.html' %}
+
+{% block content %}
+<!-- What we do-->
+<div class="container-fluid">
+  <header>
+    <h1>Admin Dashboard</h1>
+  </header>
+  <hr>
+  <div class="container-fluid">
+    <h1 style="text-align: center;">Profile</h1>
+    {% if request.session.user_type %}
+    <div class="alert alert-success forms" role="alert">
+      <!-- Access session data -->
+      <p> You logged in as a: {{ request.session.user_type }}</p>
+    </div>
+    {% endif %}
+    <div class="cards">
+      <div class="card" style="overflow-x:auto;">
+        <div class="registrationsdiv">
+          <div class="formspage">
+            <center><h2>Add New Doctor: </h2></center>
+
+            <form method="POST" class="reg-form">
+              {% csrf_token %}
+
+              <div class="fieldWrapper" style="margin: 0;">
+                {{ form.user.errors }}
+                <label for="{{ form.user.id_for_label }}">Users: </label>
+                {{ form.user }}
+              </div>
+              <div class="fieldWrapper" style="margin: 0;">
+                {{ form.name.errors }}
+                <label for="{{ form.username.id_for_label }}">Name: </label>
+                {{ form.name }}
+              </div>
+              <div class="fieldWrapper" style="margin: 0;">
+                {{ form.specialty.errors }}
+                <label for="{{ form.email.id_for_label }}">Specialty: </label>
+                {{ form.specialty }}
+              </div>
+              
+              <div class="fieldWrapper">
+                <!-- <button type="submit">{% if form.instance.pk %} Update {% else %} Create {% endif %}</button> -->
+                <button type="submit">Create </button>
+              </div>
+              <!-- <button type="submit">Register</button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+</div>
+{% endblock %}
