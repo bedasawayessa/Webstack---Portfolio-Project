@@ -1,0 +1,55 @@
+{% extends 'back/base.html' %}
+
+{% block content %}
+
+<center>
+    <h1>Prescriptions Detail</h1>
+</center>
+<div class="registrationsdiv">
+    <div class="formspage" style="min-width: 50%;">
+        <form class="reg-form">
+            <div class="mb-3 row">
+                <label for="name" class="col-sm-5 col-form-name"><strong>Medication name:</strong></label>
+                <div class="col-sm-7">
+                    {{ prescriptions.medication_name}}
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="name" class="col-sm-5 col-form-name"><strong>Dosage:</strong></label>
+                <div class="col-sm-7">
+                    {{ prescriptions.dosage}}
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="name" class="col-sm-5 col-form-name"><strong>Start_date:</strong></label>
+                <div class="col-sm-7">
+                    {{ prescriptions.start_date}}
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="name" class="col-sm-5 col-form-name"><strong>End_date:</strong></label>
+                <div class="col-sm-7">
+                    {{ prescriptions.end_date}}
+                </div>
+            </div>
+            {% if user.is_authenticated %}
+            {% if user.role == 'admin' or user.role == 'doctor' %}
+            <div class="mb-3 row">
+
+                <div class="col-sm-6">
+                    <a class="btn btn-primary "
+                        href="{% url 'prescriptions:update_prescription' prescriptions.pk %}">Update</a>
+                </div>
+                <div class="col-sm-6">
+                    <a class="btn btn-danger"
+                        href="{% url 'prescriptions:delete_prescription' prescriptions.pk %}">Delete</a>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

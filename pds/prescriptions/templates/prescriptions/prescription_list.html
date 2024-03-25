@@ -1,0 +1,76 @@
+{% extends 'back/base.html' %}
+
+{% block content %}
+<center>
+    <h1>Prescriptions List</h1>
+    <div class="row">
+        <form method="get" style="display: flex; gap: 0.5rem; align-items: center; justify-content: center;">
+
+            <!-- <div class="row" style="display: flex; gap: 0.1rem; align-items: center; justify-content: center;"> -->
+
+                <div class="fieldWrapper">
+                    <strong>Search: </strong>
+                </div>
+                <div class="fieldWrapper" style="margin: 0;">
+                    {{ search_form.search_query }}
+                </div>
+                <div class="fieldWrapper" style="margin: 0;">
+                    {{ search_form.search_by }}
+                </div>
+                <div class="fieldWrapper">
+                    <input type="submit"  value="Search" />
+                </div>
+            <!-- </div> -->
+            <!-- {{ search_form.search_query }}
+            {{ search_form.search_by }}
+             -->
+
+        </form>
+    </div>
+    <div class="registrationsdiv">
+        <div class="formspage">
+            <form class="reg-form">
+
+                <div class="table-wrapper">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="gap: 10rem;">
+                                <th scope="col">#</th>
+                                <th scope="col">patient</th>
+                                <th scope="col">medication_name</th>
+                                <th scope="col">dosage</th>
+                                <th scope="col">frequency</th>
+                                <th scope="col">start_date</th>
+                                <th scope="col"> updated_at</th>
+                                <th scope="col">end_date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for prescription in prescriptions %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ prescription.patient.name }}</td>
+                                <td>{{ prescription.medication_name }}</td>
+                                <td>{{ prescription.dosage }}</td>
+                                <td>{{ prescription.frequency }}</td>
+                                <td>{{ prescription.start_date }}</td>
+                                <td>{{ prescription.end_date }}</td>
+
+                                <td>
+                                    <button type="button" class="btn btn-primary"><a
+                                            href="{% url 'prescriptions:prescription_detail' prescription.pk%}"
+                                            style="color: white; font-weight: bold;"> Detail</a></button>
+
+                                </td>
+                                {% endfor %}
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</center>
+{% endblock %}

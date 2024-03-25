@@ -1,0 +1,86 @@
+
+{% extends 'back/base.html' %}
+
+{% block content %}
+<!-- What we do-->
+<div class="container-fluid">
+  <header>
+    <h1>Admin Dashboard</h1>
+  </header>
+  <hr>
+<div class="container-fluid">
+  <h1 style="text-align: center;">Profile</h1>
+  {% if request.session.user_type %}
+  <div class="alert alert-success forms" role="alert">
+    <!-- Access session data -->
+    <p><h2> You <strong>{{ request.user.username}} </strong> logged in as:<strong> {{ request.session.user_type }} </strong> </h2></p>
+  </div>
+  {% endif %}
+  <div class="cards">
+    <div class="card" tyle="overflow-x:auto;">
+    
+	   <!-- Start here data -->
+	   
+<div class="registrationsdiv">
+    <div class="formspage" style="min-width: 50%;">
+        <!-- <center> -->
+        <h1>
+            {% if form.instance.pk %}
+             Update User 
+            {% else %}
+             Create User
+            {% endif %}
+        </h1>
+
+        <form method="POST" class="reg-form">
+            {% csrf_token %}
+		
+            <div class="fieldWrapper" style="margin: 0;">
+              {{ form.username.errors }}
+              <label for="{{ form.username.id_for_label }}">Username: </label>
+              {{ form.username }}
+            </div>
+            <div class="fieldWrapper" style="margin: 0;">
+              {{ form.email.errors }}
+              <label for="{{ form.email.id_for_label }}">Email: </label>
+              {{ form.email }}
+            </div>
+            <div class="fieldWrapper" style="margin: 0;">
+              {{ form.password1.errors }}
+              <label for="{{ form.password1.id_for_label }}">Password: </label>
+              {{ form.password1 }}
+            </div>
+            <div class="fieldWrapper" style="margin: 0;">
+              {{ form.password2.errors }}
+              <label for="{{ form.password2.id_for_label }}">Password(Again): </label>
+              {{ form.password2 }}
+            </div>
+
+            <div class="fieldWrapper" style="margin: 0;">
+              {{ form.name.errors }}
+              <label for="{{ form.name.id_for_label }}">Name: </label>
+              {{ form.name }}
+            </div>
+            <div class="fieldWrapper" style="margin: 0;">
+              {{ form.role.errors }}
+              <label for="{{ form.role.id_for_label }}">Role: </label>
+              {{ form.role }}
+            </div>
+              <div class="fieldWrapper">
+                
+                <button type="submit">{% if form.instance.pk %} Update {% else %} Create {% endif %}</button>
+              </div>
+
+       </form>
+    </div>
+</div>
+
+ <!-- End here data -->
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+{% endblock %}

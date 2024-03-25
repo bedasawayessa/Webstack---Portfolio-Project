@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Create Prescription</h1>
+<div class="registrationsdiv">
+    <div class="formspage">
+        <form method="post" class="reg-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Create Prescription</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

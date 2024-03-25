@@ -1,0 +1,58 @@
+{% extends 'back/base.html' %}
+
+{% block content %}
+<!-- What we do-->
+<div class="container-fluid">
+  <header>
+    <h1>Admin Dashboard</h1>
+  </header>
+  <hr>
+<div class="container-fluid">
+  <h1 style="text-align: center;">Profile</h1>
+  {% if request.session.user_type %}
+  <div class="alert alert-success forms" role="alert">
+    <!-- Access session data -->
+    <p> You logged in as a: {{ request.session.user_type }}</p> 
+  </div>
+  {% endif %}
+  <div class="cards">
+    <div class="card" tyle="overflow-x:auto;">
+      <h2>Card 1</h2>
+      <h2>you logged in as:  {{ request.session.user_type }}</h2>
+      <table class="table table-bordered" >
+        <thead>
+          <tr style="gap: 10rem;">
+            <th scope="col">#</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">U_Roles</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>{{user.name }}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
+
+            <td> 
+              <button type="button" class="btn btn-primary"><a  href="" style="color: white; font-weight: bold;"> Edit</a></button>
+              <button type="button" class="btn btn-danger" style="color: white; font-weight: bold;">Delete</button>
+             
+            </td>
+          
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+   
+  </div>
+</div>
+
+
+</div>
+{% endblock %}

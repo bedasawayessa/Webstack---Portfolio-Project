@@ -1,0 +1,53 @@
+{% extends 'back/base.html' %}
+
+{% block content %}
+<center>
+    <h1>Users Detail</h1>
+</center>
+
+
+<div class="registrationsdiv">
+    <div class="formspage" style="min-width: 50%;">
+        <form class="reg-form">
+            <div class="mb-3 row">
+                <label for="name" class="col-sm-4 col-form-name"><strong>UserName:</strong></label>
+                <div class="col-sm-8">
+                    {{ users.username }}
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="age" class="col-sm-4 col-form-age"><strong>Email:</strong></label>
+                <div class="col-sm-8">
+                    {{ users.email }}
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="gender" class="col-sm-4 col-form-gender"><strong>Roles:</strong></label>
+                <div class="col-sm-8">
+                    {{ users.role }}
+                </div>
+            </div>
+           
+
+
+                <div style="display: flex; gap: .5rem;">
+                    {% if user.role == 'admin' %}
+                    <div class="col-sm-4">
+                        <a class="btn btn-primary" href="{% url 'users:user_update' request.user.pk %}">Update</a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a class="btn btn-danger" href="{% url 'users:user_delete' request.user.pk %}">Delete</a>
+                    </div>
+                    {% endif %}
+                    
+                   
+
+                </div>
+            </div>
+        </form>
+    </div>
+    
+</div>
+
+
+{% endblock %}
