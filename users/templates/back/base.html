@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %} home {% endblock %} | PDS </title>
+
+  <link href="{% static 'back/css/bootstrap.css' %}" rel="stylesheet">
+  <link href="{% static 'back/css/sidebars.css' %}" rel="stylesheet">
+
+  <link href="{% static 'back/css/mystyle.css' %}" rel="stylesheet">
+
+  <link href="{% static 'back/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+</head>
+
+<body>
+  <header>
+    <h3>
+      Patient Documentations System
+    </h3>
+  </header>
+
+  <div class="container-fluid" style="margin: 0;padding: 0;">
+    <div class="content">
+      <div class="menucontent">
+        {% if user.is_authenticated %}
+        <ul class="sidebarItem">
+          <li><a href="#" onclick=toggleSubItems(event)>
+              <img class="user-img" src="/static/image/logo.jpg" alt="mine">
+            </a>
+          </li>
+          {% if user.role == 'doctor' %}
+          <li><a href="{% url 'users:doctor_dashboard' %}" onclick=toggleSubItems(event)> Home</a>
+          </li>
+            {% endif %}
+            {% if user.role == 'admin' %}
+          <li><a href="{% url 'users:admin_dashboard' %}" onclick=toggleSubItems(event)> Home</a>
+          </li>
+            {% endif %}
+          
+
+          <li>
+            <a href="#" onclick=toggleSubItems(event)> Pages</a>
+
+            <ul class="sub-items">
+              {% if user.role == 'admin' %}
+              <li class="link"><a href="{% url 'users:register_user'%}"> Add User</a></li>
+              <li class="link"><a href="{% url 'doctor:register_doctor'%}"> Add Doctor</a></li>
+              <li><a href="{% url 'patients:patient_create' %}"> Add Patient</a></li>
+              <li><a href="{% url 'doctor:doctor_list'%}"> Doctor List</a></li>
+              <li><a href="{% url 'users:users_list'%}"> User List</a></li>
+              <li><a href="{% url 'patients:patient_list'%}"> Patient List</a></li>
+              <li><a href="{% url 'appointments:appointment_list'%}"> Appointment List</a></li>
+              <li><a href="{% url 'appointments:create_appointment'%}"> Create Appointment</a></li>
+
+              {% endif %}
+              {% if user.role == 'doctor' %}
+              <li><a href="{% url 'patients:patient_create' %}"> Add Patient</a></li>
+              <li><a href="{% url 'prescriptions:create_prescription' %}"> Add prescriptions</a></li>
+              <li><a href="{% url 'prescriptions:prescription_list' %}"> Prescriptions List</a></li>
+              <li><a href="{% url 'doctor:doctor_list'%}"> Doctor List</a></li>
+              <li><a href="{% url 'patients:patient_list'%}"> Patient List</a></li>
+              <li><a href="{% url 'appointments:appointment_list'%}"> Appointment List</a></li>
+              <li><a href="{% url 'appointments:create_appointment'%}"> Create Appointment</a></li>
+              {% endif %}
+              {% if user.role == 'patient' %}
+              <li><a href="{% url 'prescriptions:prescription_list' %}"> Prescriptions List</a></li>
+              <li><a href="{% url 'patients:patient_list'%}"> Patient List</a></li>
+              {% endif %}
+            </ul>
+
+          </li>
+          <li><a href="{% url 'users:logoutpage'%}"> logout</a>
+          </li>
+        </ul>
+        {% endif %}
+      </div>
+
+      <!-- profile home page  -->
+      <div class="container">
+        <div class="homecontent">
+          {% block content %}
+          {% endblock %}
+          <!-- Main content goes here -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script>
+
+    function toggleSubItems(event) {
+
+      /* event.preventDefault();*/
+
+      //const listItem = event.target.parentElemnet;
+      const listItem = event.target.parentNode;
+      const subItems = listItem.querySelector('.sub-items');
+      
+      if (subItems.style.display === 'none') {
+        subItems.style.display = 'block';
+        subItems.style.padding = '0.5rem';
+
+      } else {
+        subItems.style.display = 'none';
+
+      }
+
+    } 
+  </script>
+
+  <script src="{% static 'back/js/bootstrap.js' %}"></script>
+  <script src="{% static 'back/js/bootstrapg.min.js' %}"></script>
+  <script src="{% static 'back/js/bootstrap.bundle.js' %}"></script>
+  <script src="{% static 'back/js/sidebars.js' %}"></script>
+  <!--  <script>
+    function toggleSidebar() {
+      const sidebars = document.querySelector('.menucontent');
+      sidebars.classList.toggle('collapsed');
+      sidebars.style.width = 100;
+      sidebars.style.padding = 15;
+
+    } 
+  </script> -->
+
+</body>
+
+</html>
