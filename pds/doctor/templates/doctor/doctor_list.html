@@ -12,11 +12,27 @@
         {% if request.session.user_type %}
         <div class="alert alert-success forms" role="alert">
             <!-- Access session data -->
-            <p> You logged in as a: {{ request.session.user_type }}</p>
+            <p>
+            <h2> You <strong>{{ request.user.username}} </strong> logged in as:<strong> {{ request.session.user_type }}
+                </strong> </h2>
+            </p>
         </div>
         {% endif %}
         <div class="cards">
             <div class="card" style="overflow-x:auto;">
+                
+                    <!-- Access session data -->
+                    {% if messages %}
+                    <div class="alert alert-success forms" role="alert">
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                    {% endif %}
+                
+
                 <!-- Start here data -->
                 <center>
                     <h1>Doctors List</h1>
@@ -36,11 +52,7 @@
                             <div class="fieldWrapper">
                                 <input type="submit" value="Search" />
                             </div>
-                            <!-- </div> -->
-                            <!-- 
-                            {{ search_form.search_query }}
-                            {{ search_form.search_by }}
-                             -->
+                          
 
                         </form>
                     </div>
@@ -48,7 +60,8 @@
 
                     <div class="registrationsdiv">
                         <div class="formspage">
-                            <form class="reg-form">
+                            <!-- <form class="reg-forms"> -->
+                                <form method="GET">
 
                                 <div class="table-wrapper">
                                     <table class="table table-bordered">
@@ -66,7 +79,7 @@
                                             {% for doctor in doctors %}
                                             <tr>
                                                 <th scope="row">{{ forloop.counter }}</th>
-                                                <td>{{ doctor.name }}</td>
+                                                <td>{{ doctor.user.username }}</td>
                                                 <td>{{ doctor.name }}</td>
                                                 <td>{{ doctor.specialty }}</td>
 

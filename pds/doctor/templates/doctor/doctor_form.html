@@ -17,12 +17,22 @@
     {% endif %}
     <div class="cards">
       <div class="card" style="overflow-x:auto;">
+        <!-- Start here data -->
         <div class="registrationsdiv">
           <div class="formspage">
-            
-            <center><h2>Add New Doctor: </h2></center>
+            <!-- <center> -->
+            <h1>
+              {% if form.instance.pk %}
+              Update Doctor
+              {% else %}
+              Create Doctor
+              {% endif %}
+            </h1>
 
-            <form method="POST" class="reg-form">
+
+            <!-- <center><h2>Add New Doctor: </h2></center> -->
+
+            <form method="POST" >
               {% csrf_token %}
 
               <div class="fieldWrapper" style="margin: 0;">
@@ -40,21 +50,19 @@
                 <label for="{{ form.email.id_for_label }}">Specialty: </label>
                 {{ form.specialty }}
               </div>
-              
+
               <div class="fieldWrapper">
-                <!-- <button type="submit">{% if form.instance.pk %} Update {% else %} Create {% endif %}</button> -->
-                <button type="submit">Create </button>
+                <button type="submit">{% if form.instance.pk %} Update {% else %} Create {% endif %}</button>
               </div>
-              <!-- <button type="submit">Register</button> -->
+
             </form>
           </div>
         </div>
+
+        <!-- End here data -->
+
       </div>
-
-
     </div>
   </div>
-
-
 </div>
 {% endblock %}

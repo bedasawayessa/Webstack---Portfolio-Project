@@ -4,7 +4,7 @@
 <center>
     <h1>Patient Detail</h1>
 </center>
-<center>
+
 <div class="registrationsdiv">
     <div class="formspage" style="min-width: 50%;">
         <form class="reg-form">
@@ -25,7 +25,7 @@
             <div class="mb-3 row">
                 <div style="display: flex; gap: .5rem;">
                     <div class="col-sm-4">
-                        <a class="btn btn-primary" href="#">Update</a>     
+                        <a class="btn btn-primary" href="{% url 'doctor:doctor_update' doctor.pk %}">Update</a>     
                     </div>
 
                     <div class="col-sm-4">
@@ -36,6 +36,6 @@
         </form>
     </div>
 </div>
-</center>
+
 
 {% endblock %}
