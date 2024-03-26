@@ -78,4 +78,4 @@ class UserLoginForm(forms.ModelForm):
         
 class SearchForm(forms.Form):
     search_query = forms.CharField(label='Search', required=False)
-    search_by = forms.ChoiceField(label='Search By', choices=[('name', 'Name'), ('id', 'ID'), ('role', 'roles')], required=False)
+    search_by = forms.ChoiceField(label='Search By', choices=[('username', 'Username'), ('id', 'ID'), ('role', 'Roles')], required=False)

@@ -4,7 +4,7 @@
 <h1>Create Prescription</h1>
 <div class="registrationsdiv">
     <div class="formspage">
-        <form method="post" class="reg-form">
+        <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Create Prescription</button>

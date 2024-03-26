@@ -3,11 +3,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 # Create your views here.
 from .models import Prescription
 from .forms import PrescriptionForm,SearchForm
+from django.contrib.auth.decorators import login_required
 
 # def prescription_list(request):
 #     prescriptions = Prescription.objects.all()
 #     return render(request, 'prescriptions/prescription_list.html', {'prescriptions': prescriptions})
-
+@login_required
 def prescription_list(request):
 	search_form = SearchForm(request.GET)
 	
@@ -33,14 +34,14 @@ def prescription_list(request):
 
 	return render(request,'prescriptions/prescription_list.html', context)
 
-
+@login_required
 def prescription_detail(request, pk):
 	prescriptions = get_object_or_404(Prescription, pk=pk)
 	return render(request, 'prescriptions/prescription_detail.html', {'prescriptions': prescriptions})
 
 
 
-
+@login_required
 def create_prescription(request):
 	if request.method == 'POST':
 		form = PrescriptionForm(request.POST)
@@ -52,7 +53,7 @@ def create_prescription(request):
 	return render(request, 'prescriptions/prescription_form.html', {'form': form})
 	#return render(request, 'prescriptions/create_prescription.html', {'form': form})
 
-
+@login_required
 def update_prescription(request, pk):
 	
 	#prescription = Prescription.objects.get(id=prescription_id)
@@ -69,7 +70,7 @@ def update_prescription(request, pk):
 	return render(request, 'prescriptions/prescription_form.html', {'form': form})
 	#return render(request, 'prescriptions/update_prescription.html', {'form': form})
 
-
+@login_required
 # View for deleting an existing prescription
 def delete_prescription(request, prescription_id):
 	prescription = get_object_or_404(Prescription, id=prescription_id)

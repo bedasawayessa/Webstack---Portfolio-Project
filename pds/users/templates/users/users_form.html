@@ -22,7 +22,7 @@
 	   <!-- Start here data -->
 	   
 <div class="registrationsdiv">
-    <div class="formspage" style="min-width: 50%;">
+    <div class="formspage">
         <!-- <center> -->
         <h1>
             {% if form.instance.pk %}
@@ -32,7 +32,7 @@
             {% endif %}
         </h1>
 
-        <form method="POST" class="reg-form">
+        <form method="POST" >
             {% csrf_token %}
 		
             <div class="fieldWrapper" style="margin: 0;">

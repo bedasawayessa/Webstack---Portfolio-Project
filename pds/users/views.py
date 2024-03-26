@@ -51,7 +51,7 @@ def register_user(request):
 		form = UserRegistrationForm(user_role=user_role)
 	
 	return render(request, 'users/users_form.html', {'form': form})
-
+@login_required
 def user_update(request, pk):
 	
 	user = get_object_or_404(CustomUser, pk = pk)
@@ -132,7 +132,7 @@ def logoutpage(request):
 	else:
 		return render(request, 'front/login.html') 
 
-
+@login_required
 def users_list(request):
 	search_form = SearchForm(request.GET)
 	users = CustomUser.objects.all().order_by('-id')
@@ -143,8 +143,8 @@ def users_list(request):
 		#     patients = patients.filter(name__icontains=search_query)  # Example: Searching by name
 
 		if search_query:
-			if search_by == 'name':
-				users = users.filter(name__icontains=search_query)
+			if search_by == 'username':
+				users = users.filter(username__icontains=search_query)
 			elif search_by == 'id':
 				users = users.filter(id=search_query)
 			elif search_by == 'role':
@@ -157,7 +157,7 @@ def users_list(request):
 
 	return render(request, 'users/users_list.html', context)
 
-
+@login_required
 def users_detail(request, pk):
 	users = get_object_or_404(CustomUser, pk=pk)
 	return render(request, 'back/users_detail.html', {'users': users})

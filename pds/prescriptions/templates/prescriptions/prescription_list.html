@@ -29,7 +29,7 @@
     </div>
     <div class="registrationsdiv">
         <div class="formspage">
-            <form class="reg-form">
+            <form method="GET">
 
                 <div class="table-wrapper">
                     <table class="table table-bordered">
@@ -41,8 +41,9 @@
                                 <th scope="col">dosage</th>
                                 <th scope="col">frequency</th>
                                 <th scope="col">start_date</th>
-                                <th scope="col"> updated_at</th>
+                                <th scope="col">updated_at</th>
                                 <th scope="col">end_date</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,6 +55,7 @@
                                 <td>{{ prescription.dosage }}</td>
                                 <td>{{ prescription.frequency }}</td>
                                 <td>{{ prescription.start_date }}</td>
+                                <td>{{ prescription.updated_at }}</td>
                                 <td>{{ prescription.end_date }}</td>
 
                                 <td>

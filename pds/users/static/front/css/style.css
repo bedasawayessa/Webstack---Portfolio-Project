@@ -169,7 +169,7 @@ nav a:hover {
 
 /* a registrations form css */
 .registrationsdiv {
-    max-width: 90%;
+
     width: 100%;
     /* Ensure it takes the full width of its parent */
     display: flex;
@@ -182,21 +182,20 @@ nav a:hover {
 }
 
 .formspage {
-    padding: 10px;
+    /* padding: 10px; */
     display: block;
     justify-content: center;
     align-items: center;
-    box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.5); */
     /* box-shadow: 10px 10px 20px 0px rgba(41, 206, 195, 0); */
-
 }
 
-.reg-form {
+/* .reg-form {
     display: block;
     padding: 20px;
     box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.5);
     font-weight: bold;
-}
+} */
 
 /* for registran form */
 .fieldWrapper {
@@ -292,18 +291,7 @@ nav a:hover {
     margin-bottom: 30px;
 }
 
-/* for print report */
-@media print {
 
-    /* Setting the page size to A4 */
-    @page {
-        size: A4;
-        margin: 0;
-        /* Optional: Remove default margin */
-    }
-
-    /* a registrations form css */
-}
 
 /* Sidebar styles */
 .adminsidebar {
@@ -317,16 +305,7 @@ nav a:hover {
     padding: 15px;
 }
 
-/* Page content styles */
-.content {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto 0;
-    margin-left: auto 0;
-    padding: 20px;
-}
+
 
 /* Sidebar link styles */
 .adminsidebar ul {

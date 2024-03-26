@@ -16,15 +16,10 @@
     {% if request.session.user_type %}
     <div class="alert alert-success forms" role="alert">
       <!-- Access session data -->
-      <p> You logged in as a: {{ request.session.user_type }}</p>
+      <p><h2> You <strong>{{ request.user.username}} </strong> logged in as:<strong> {{ request.session.user_type }} </strong> </h2></p>
     </div>
     {% endif %}
-    <div class="cards">
-      <div class="card" tyle="overflow-x:auto;">
-        <h2>Card 1</h2>
-        <h2>you logged in as: {{ request.session.user_type }}</h2>
-      </div>
-    </div>
+ 
   </div>
 
 

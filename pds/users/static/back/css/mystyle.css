@@ -23,21 +23,36 @@ header h1{
 
 
 .content {
-    display: flex; /* Added */
+    padding: 0;
+    width: 100%;
+    margin-left: auto 0;
+    display: flex; 
+}
+/* Main content styles */
+.homecontent {
+    flex: 1;
+    padding: 2px;
 }
 
+/* Page content styles */
+/* .content {
+    width: 100%;
+    display: flex;
+    margin: auto 0;
+    margin-left: auto 0;
+    padding: 20px;
+} */
 
 /* Sidebar styles */
 .menucontent {
     background-color: #555;
     color: #fff;
-    width: 250px;
     min-height: 100vh; /* Updated */
     display: flex;
-    flex-direction: column;
+    width: auto;
     align-items: flex-start;
-    padding: 10px;
-    transition: width 0.3s;
+    padding: 5px;
+    transition: width 0.6s;
     margin-top: 0px;
     z-index: 999;
 }
@@ -58,7 +73,7 @@ h1 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 5px;
 }
 .card {
     flex-basis: 100%;
@@ -66,26 +81,21 @@ h1 {
     border-radius: 8px;
     /* box-shadow: 0 2px 4px rgba(226, 229, 229, 0.1); */
     box-shadow: 0px 25px 80px rgba(0, 0, 0, 0.5);
-    padding: 20px;
+    padding: 10px;
     /* flex: 0 0 calc(50% - 10px); */
 }
 /* .cards:nth-child(1):nth-child(2):nth-child(3) {
     flex-basis: 25%;
 } */
-/* Main content styles */
-.homecontent {
-    flex: 1;
-    padding: 10px;
-}
+
 /* @media (max-width: 768px) { */
 
  @media only screen and (max-width: 768px) {
     .menucontent {
-        width: 160px;
+        width: auto;
         display: block;
-        /* padding: 5px; */
-        /* flex-wrap: wrap; */
-        /* display: table; */
+        /* flex: 1; */
+       
     }
     .menucontent .sidebarItem li a{
 
@@ -115,6 +125,11 @@ h1 {
     height: 50px;
     border-radius: 50%;
 } 
+
+.sidebarItem{
+    width: fit-content;
+    list-style: none;
+}
 
 .menucontent .sidebarItem li a img{
     display: flex;
@@ -203,7 +218,7 @@ h1 {
 /* for forms  */
 /* a registrations form css */
 .registrationsdiv{
-    width: auto;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -213,22 +228,22 @@ h1 {
 }
 
 .formspage{
-    padding: 30px;
+    padding: 10px;
     width: 100%;
     display: block;
     justify-content: center;
     align-items: center;
-    box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.5); 
     /* box-shadow: 10px 10px 20px 0px rgba(41, 206, 195, 0); */
     
-}
-.reg-form{
-    display: block;
-    padding: 20px;
-    box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.5);
-    width: 100%;
+} 
+/* .reg-form{
+    display: block; */
+    /* padding: 20px; */
+    /* box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.5);
+    width: 100%; */
     /* font-weight: bold; */
-}
+/* } */
 
 /* for registran form */
 .fieldWrapper {
@@ -281,3 +296,15 @@ h1 {
   }
 
 
+/* for print report */
+@media print {
+
+    /* Setting the page size to A4 */
+    @page {
+        size: A4;
+        margin: 0;
+        /* Optional: Remove default margin */
+    }
+
+    /* a registrations form css */
+}

@@ -30,33 +30,41 @@
       <div class="menucontent">
         {% if user.is_authenticated %}
         <ul class="sidebarItem">
-          <li><a href="#" onclick=toggleSubItems(event)>
-              <img class="user-img" src="/static/image/logo.jpg" alt="mine">
+          <li class="btn btn-success" >
+           
+            <a class href="#">
+               <strong>{{ request.user.username}} </strong> <br>
+                <strong> {{ request.session.user_type }} </strong> 
+    
             </a>
           </li>
           {% if user.role == 'doctor' %}
-          <li><a href="{% url 'users:doctor_dashboard' %}" onclick=toggleSubItems(event)> Home</a>
+          <li><a class = "btn btn-info" href="{% url 'users:doctor_dashboard' %}" onclick=toggleSubItems(event)> Home</a>
           </li>
-            {% endif %}
-            {% if user.role == 'admin' %}
-          <li><a href="{% url 'users:admin_dashboard' %}" onclick=toggleSubItems(event)> Home</a>
+          {% endif %}
+          {% if user.role == 'admin' %}
+          <li><a class = "btn btn-info" href="{% url 'users:admin_dashboard' %}" onclick=toggleSubItems(event)> Home</a>
           </li>
-            {% endif %}
-          
+          {% endif %}
+          {% if user.role == 'patient' %}
+          <li><a class = "btn btn-info" href="{% url 'users:patient_dashboard' %}" onclick=toggleSubItems(event)> Home</a>
+          </li>
+          {% endif %}
+
 
           <li>
-            <a href="#" onclick=toggleSubItems(event)> Pages</a>
+            <a class = "btn btn-info" onclick = toggleSubItems(event)> Permissions</a>
 
             <ul class="sub-items">
               {% if user.role == 'admin' %}
-              <li class="link"><a href="{% url 'users:register_user'%}"> Add User</a></li>
-              <li class="link"><a href="{% url 'doctor:register_doctor'%}"> Add Doctor</a></li>
-              <li><a href="{% url 'patients:patient_create' %}"> Add Patient</a></li>
-              <li><a href="{% url 'doctor:doctor_list'%}"> Doctor List</a></li>
-              <li><a href="{% url 'users:users_list'%}"> User List</a></li>
-              <li><a href="{% url 'patients:patient_list'%}"> Patient List</a></li>
-              <li><a href="{% url 'appointments:appointment_list'%}"> Appointment List</a></li>
-              <li><a href="{% url 'appointments:create_appointment'%}"> Create Appointment</a></li>
+              <li  ><a href="{% url 'users:register_user'%}"> Add User</a></li>
+              <li ><a href="{% url 'doctor:register_doctor'%}"> Add Doctor</a></li>
+              <li ><a href="{% url 'patients:patient_create' %}"> Add Patient</a></li>
+              <li ><a href="{% url 'doctor:doctor_list'%}"> Doctor List</a></li>
+              <li ><a href="{% url 'users:users_list'%}"> User List</a></li>
+              <li ><a href="{% url 'patients:patient_list'%}"> Patient List</a></li>
+              <li ><a href="{% url 'appointments:appointment_list'%}"> Appointment List</a></li>
+              <li ><a href="{% url 'appointments:create_appointment'%}"> Create Appointment</a></li>
 
               {% endif %}
               {% if user.role == 'doctor' %}
@@ -71,44 +79,43 @@
               {% if user.role == 'patient' %}
               <li><a href="{% url 'prescriptions:prescription_list' %}"> Prescriptions List</a></li>
               <li><a href="{% url 'patients:patient_list'%}"> Patient List</a></li>
+              <li><a href="{% url 'appointments:appointment_list'%}"> Appointment List</a></li>
+
               {% endif %}
             </ul>
 
           </li>
-          <li><a href="{% url 'users:logoutpage'%}"> logout</a>
+          <li><a class = "btn btn-warning" href="{% url 'users:logoutpage'%}"> logout</a>
           </li>
         </ul>
         {% endif %}
       </div>
 
       <!-- profile home page  -->
-      <div class="container">
+      <div class="container-fluid">
         <div class="homecontent">
           {% block content %}
           {% endblock %}
           <!-- Main content goes here -->
         </div>
-      </div>
+     </div>
 
     </div>
   </div>
-  <script>
 
+<script>
     function toggleSubItems(event) {
-
       /* event.preventDefault();*/
-
       //const listItem = event.target.parentElemnet;
       const listItem = event.target.parentNode;
       const subItems = listItem.querySelector('.sub-items');
-      
+
       if (subItems.style.display === 'none') {
         subItems.style.display = 'block';
         subItems.style.padding = '0.5rem';
-
       } else {
         subItems.style.display = 'none';
-
+        subItems.style.boxSizing = 'border-box';  // Corrected property name to 'boxSizing'
       }
 
     } 
@@ -118,16 +125,7 @@
   <script src="{% static 'back/js/bootstrapg.min.js' %}"></script>
   <script src="{% static 'back/js/bootstrap.bundle.js' %}"></script>
   <script src="{% static 'back/js/sidebars.js' %}"></script>
-  <!--  <script>
-    function toggleSidebar() {
-      const sidebars = document.querySelector('.menucontent');
-      sidebars.classList.toggle('collapsed');
-      sidebars.style.width = 100;
-      sidebars.style.padding = 15;
-
-    } 
-  </script> -->
+ 
 
 </body>
-
 </html>

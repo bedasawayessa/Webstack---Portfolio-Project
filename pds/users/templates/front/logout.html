@@ -8,6 +8,17 @@
     <div class="formspage">
       {% block page %} <h2>Logout {% endblock %} | Form</h2>
       <h1>Welcome, Go!</h1>
+      <form method="POST" class="reg-form">
+        {% csrf_token %}
+        
+        
+        <div class="fieldWrapper">
+            <!-- <button type="submit">{% if form.instance.pk %} Update {% else %} Create {% endif %}</button> -->
+            <button type="submit"> Login </button>
+        </div>
+        
+       
+    </form>
     </div>
   </div>
 </div>
