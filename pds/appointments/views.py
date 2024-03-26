@@ -3,7 +3,10 @@ from .forms import SearchForm
 
 # Create your views here.
 from .models import Appointment
+from .forms import AppointmentForm
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def appointment_list(request):
 	search_form = SearchForm(request.GET)
 	
@@ -33,8 +36,8 @@ def appointment_list(request):
 	# return render(request, 'appointments/appointment_list.html', {'appointments': appointments})
 
 
-from .forms import AppointmentForm
 
+@login_required
 def create_appointment(request):
 	if request.method == 'POST':
 		form = AppointmentForm(request.POST)
