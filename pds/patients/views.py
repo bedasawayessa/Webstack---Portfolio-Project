@@ -10,11 +10,12 @@ from .forms import PatientForm
 from .forms import SearchForm
 from users.decorators import admin_required, doctor_required
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def indexpage(request):
 	return render(request, 'index.html')
-
+@login_required
 def patient_list(request):
     search_form = SearchForm(request.GET)
     patients = Patient.objects.all().order_by('-id')
@@ -40,7 +41,7 @@ def patient_list(request):
     return render(request, 'patients/patient_list.html', context)
     #return render(request, 'patients/patient_list.html', {'patients': patients})
 
-
+@login_required
 def patient_detail(request, pk):
     patient = get_object_or_404(Patient, pk=pk)
     return render(request, 'patients/patient_detail.html', {'patient': patient})
@@ -79,6 +80,7 @@ def patient_delete(request, pk):
         return patient_list(request)
     return render(request, 'patients/patient_confirm_delete.html', {'patient': patient})
 
+@login_required
 def patient_report(request):
     # Get total number of patients
     total_patients = Patient.objects.count()
@@ -106,16 +108,37 @@ def patient_report(request):
 
     return render(request, 'patients/patient_report.html', context)
 
-
+@login_required
 def individual_patient_report(request, patient_id):
-    patient = Patient.objects.get(id=patient_id)
-    prescriptions = Prescription.objects.filter(patient=patient)
-    appointments = Appointment.objects.filter(patient=patient)
     
-    context = {
-        'patient': patient,
-        'prescriptions': prescriptions,
-        'appointments': appointments,
-    }
+    patient = get_object_or_404(Patient, id=patient_id)
     
-    return render(request, 'patients/individual_patient_report.html', context)
+    # Check if the logged-in user is the patient trying to access their own report
+    if request.user.is_authenticated and request.user == patient.user or request.user.role == 'doctor' or request.user.role == 'admin':
+        prescriptions = Prescription.objects.filter(patient=patient)
+        appointments = Appointment.objects.filter(patient=patient)
+        
+        context = {
+            'patient': patient,
+            'prescriptions': prescriptions,
+            'appointments': appointments,
+        }
+        
+        return render(request, 'patients/individual_patient_report.html', context)
+    else:
+        messages.error(request, "You can only print your own reports.")
+        return patient_list(request)  # Redirect to login page if the user is not the patient
+    
+# def individual_patient_report(request, patient_id):
+#     patient = Patient.objects.get(id=patient_id)
+    
+#     prescriptions = Prescription.objects.filter(patient=patient)
+#     appointments = Appointment.objects.filter(patient=patient)
+    
+#     context = {
+#         'patient': patient,
+#         'prescriptions': prescriptions,
+#         'appointments': appointments,
+#     }
+    
+#     return render(request, 'patients/individual_patient_report.html', context)
